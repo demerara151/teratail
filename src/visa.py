@@ -1,3 +1,7 @@
+"""
+selenium 入力ボックスの要素が見つからない
+https://teratail.com/questions/2ir4j74anuefal#reply-mxmine38u4ivvl)
+"""
 # type: ignore
 import asyncio
 

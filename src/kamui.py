@@ -1,4 +1,7 @@
-"[seleniumでスクレイピング。ある部分が取れない](https://teratail.com/questions/kwcuzshawbpplv)"
+"""
+seleniumでスクレイピング。ある部分が取れない
+https://teratail.com/questions/kwcuzshawbpplv
+"""
 import asyncio
 
 import httpx
