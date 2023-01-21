@@ -9,6 +9,7 @@ readme = "README.md"
 python = "^3.11"
 httpx = "^0.23.3"
 playwright = "^1.29.1"
+selectolax = "^0.3.12"
 
 [tool.poetry.group.dev.dependencies]
 black = "^22.12.0"
