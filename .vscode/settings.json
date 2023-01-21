@@ -1,0 +1,29 @@
+
+{
+	"[python]": {
+		"editor.defaultFormatter": "ms-python.python",
+		"editor.fontFamily": "Delugia, 'Delugia Mono', 'IBM Plex Sans JP'",
+		"editor.letterSpacing": 0.5,
+		"editor.stickyScroll.enabled": true,
+		"editor.wordBasedSuggestions": false,
+		"editor.wordWrap": "on",
+		"editor.wordWrapColumn": 79
+	},
+	"python.analysis.completeFunctionParens": true,
+	"python.analysis.inlayHints.functionReturnTypes": true,
+	"python.analysis.inlayHints.variableTypes": true,
+	"python.analysis.logLevel": "Warning",
+	"python.analysis.typeCheckingMode": "strict",
+	"python.defaultInterpreterPath": ".venv\\Scripts\\python.exe",
+	"python.formatting.blackArgs": ["--line-length=79"],
+	"python.formatting.provider": "black",
+	"python.languageServer": "Pylance",
+	"python.linting.enabled": true,
+	"python.linting.flake8Enabled": true,
+	"python.linting.lintOnSave": true,
+	"python.terminal.activateEnvironment": true,
+	"python.testing.pytestArgs": ["tests"],
+	"python.testing.pytestEnabled": true,
+	"python.testing.unittestEnabled": false,
+
+}
