@@ -1,0 +1,10 @@
+{
+	"recommendations": [
+		"ms-python.python",
+		"streetsidesoftware.code-spell-checker",
+		"esbenp.prettier-vscode",
+		"tamasfe.even-better-toml",
+		"catppuccin.catppuccin-vsc",
+		"usernamehw.errorlens"
+	]
+}

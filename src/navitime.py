@@ -17,6 +17,7 @@ class Spider:
     page_number: int = 1
     query: str = "poi?spot"
     result: list[str] = field(default_factory=list[str])
+    limit: int = 200  # ページの最大数の想定
 
     async def fetch(self) -> None:
         """
@@ -33,7 +34,8 @@ class Spider:
                 ),
             }
         ) as client:
-            while True:
+            # while True はちょっと怖いので
+            while self.page_number < self.limit:
                 res: httpx.Response = await client.get(
                     self.url.format(self.page_number)
                 )
@@ -75,7 +77,8 @@ class Spider:
             browser = await p.chromium.launch()
             page = await browser.new_page()
 
-            while True:
+            # while True はちょっと怖いので
+            while self.page_number < self.limit:
                 res = await page.goto(self.url.format(self.page_number))
 
                 if res is None or res.status == 404:
