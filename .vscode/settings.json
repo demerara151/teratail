@@ -26,5 +26,5 @@
 	"python.testing.unittestEnabled": false,
 
 	// Spell check
-	"cSpell.words": ["chromedriver", "httpx", "teratail"]
+	"cSpell.words": ["chromedriver", "httpx", "kamui", "navitime", "teratail"]
 }
