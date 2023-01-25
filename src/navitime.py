@@ -34,17 +34,17 @@ class Spider:
                 ),
             }
         ) as client:
-            # while True はちょっと怖いので
             while self.page_number < self.limit:
-                res: httpx.Response = await client.get(
-                    self.url.format(self.page_number)
-                )
+                url = self.url.format(self.page_number)
 
-                if res.status_code == 404:
+                # 初めに HEAD request を投げてステータスコードを確認
+                response_header: httpx.Response = await client.head(url)
+                if response_header.status_code == 404:
                     print("End of the pages.")
                     break
-                elif res.status_code == 200:
-                    tree = HTMLParser(res.content)
+                elif response_header.status_code == 200:
+                    response: httpx.Response = await client.get(url)
+                    tree = HTMLParser(response.content)
                     self.result.extend(
                         [
                             link
@@ -59,10 +59,7 @@ class Spider:
                     self.page_number += 1
                     continue
                 else:
-                    print(
-                        "[Error]: Something's happened.\n"
-                        f" Status: {res.status_code}"
-                    )
+                    print(f"Status: {response_header.status_code}")
                     break
 
         pprint(self.result)
