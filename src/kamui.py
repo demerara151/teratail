@@ -3,6 +3,7 @@ seleniumでスクレイピング。ある部分が取れない
 https://teratail.com/questions/kwcuzshawbpplv
 """
 import asyncio
+import csv
 
 import httpx
 
@@ -14,9 +15,7 @@ url: str = (
 pages = range(1, 1593)
 
 
-async def fetch(page: int) -> None:
-    "該当の URL にリクエストを送信し、返ってきた値を TSV に書き込む"
-
+async def fetch(page: int) -> list[tuple[int, str]]:
     async with httpx.AsyncClient(
         headers={
             "Accept": "application/json",
@@ -32,21 +31,25 @@ async def fetch(page: int) -> None:
         json = res.json()
         await asyncio.sleep(1)
 
-        # チャンネル名にコンマが含まれていることがあるため、CSV ではなく TSV を使用
-        with open(f"database/{page:04}_ranking.tsv", "w") as f:
-            for item in json["item"]:
-                f.write(f'{item["rank"]}\t{item["title"]}\n')
+        return [(item["rank"], item["title"]) for item in json["item"]]
 
 
-async def main() -> None:
-    """
-    並列処理で加速
-    複数のファイルに分かれることになるが、後から結合すればいい
-    """
+async def main() -> list[list[tuple[int, str]]]:
+    results: list[asyncio.Task[list[tuple[int, str]]]] = []
     async with asyncio.TaskGroup() as tg:
         for page in pages:
-            tg.create_task(fetch(page))
+            task = tg.create_task(fetch(page))
+            results.append(task)
+    return [task.result() for task in results]
 
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    results = asyncio.run(main())
+    results.sort()
+    for res in results:
+        with open("ranking.csv", "a", newline="") as file:
+            # use tab string instead of comma
+            # because some channel name has comma
+            csv_out = csv.writer(file, delimiter="\t")
+            csv_out.writerow(["rank", "channel"])
+            csv_out.writerows(res)

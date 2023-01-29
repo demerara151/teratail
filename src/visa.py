@@ -1,7 +1,7 @@
 # type: ignore
 """
 selenium 入力ボックスの要素が見つからない
-https://teratail.com/questions/2ir4j74anuefal#reply-mxmine38u4ivvl)
+https://teratail.com/questions/2ir4j74anuefal
 """
 import asyncio
 from dataclasses import dataclass
@@ -35,7 +35,7 @@ class Spider:
         browser.implicitly_wait(5)
         browser.get(self.url)
 
-        # Get the shadow root from shadow DOM
+        # Get the shadow root
         shadow = browser.find_element(By.XPATH, "//dm-calculator").shadow_root
 
         # Input number of amount
