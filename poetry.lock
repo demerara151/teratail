@@ -576,14 +576,14 @@ files = [
 
 [[package]]
 name = "pathspec"
-version = "0.10.3"
+version = "0.11.0"
 description = "Utility library for gitignore style pattern matching of file paths."
 category = "dev"
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "pathspec-0.10.3-py3-none-any.whl", hash = "sha256:3c95343af8b756205e2aba76e843ba9520a24dd84f68c22b9f93251507509dd6"},
-    {file = "pathspec-0.10.3.tar.gz", hash = "sha256:56200de4077d9d0791465aa9095a01d421861e405b5096955051deefd697d6f6"},
+    {file = "pathspec-0.11.0-py3-none-any.whl", hash = "sha256:3a66eb970cbac598f9e5ccb5b2cf58930cd8e3ed86d393d541eaf2d8b1705229"},
+    {file = "pathspec-0.11.0.tar.gz", hash = "sha256:64d338d4e0914e91c1792321e6907b5a593f1ab1851de7fc269557a21b30ebbc"},
 ]
 
 [[package]]
@@ -604,19 +604,19 @@ test = ["appdirs (==1.4.4)", "covdefaults (>=2.2.2)", "pytest (>=7.2)", "pytest-
 
 [[package]]
 name = "playwright"
-version = "1.29.1"
+version = "1.30.0"
 description = "A high-level API to automate web browsers"
 category = "main"
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "playwright-1.29.1-py3-none-macosx_10_13_x86_64.whl", hash = "sha256:f9c1d16089448933f885ebd5af0878e3f0dab1d3f30d39a6b75c80b388658623"},
-    {file = "playwright-1.29.1-py3-none-macosx_11_0_arm64.whl", hash = "sha256:a5a5223466e552e5d1e09695acfa0f48037222a2ae8d0df5bf0e185205d923e8"},
-    {file = "playwright-1.29.1-py3-none-macosx_11_0_universal2.whl", hash = "sha256:c607282065628761ef6b218879b5aa2eef463c5d763512e4e12b6211acac0408"},
-    {file = "playwright-1.29.1-py3-none-manylinux1_x86_64.whl", hash = "sha256:f6388479558db9b80ec609dfcc06a4bbbecfc62e5b61e3b89142abf26aacfc61"},
-    {file = "playwright-1.29.1-py3-none-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:5f81bf95c5d315a879ccd761d7131e48ec02f5c1c593eb927214fa78801e7236"},
-    {file = "playwright-1.29.1-py3-none-win32.whl", hash = "sha256:83a132b4b074e3b23cb6b93b9527cd36dfd8b37abbfce5b239cbe88822d9939a"},
-    {file = "playwright-1.29.1-py3-none-win_amd64.whl", hash = "sha256:4cc60189e77db718924c58fbee46af25c77ef5509665999f2ca960225a1f49df"},
+    {file = "playwright-1.30.0-py3-none-macosx_10_13_x86_64.whl", hash = "sha256:2ea5d88880fbfa69f05ab758ddd66310079828d6c5c8efe497485c341d147a4e"},
+    {file = "playwright-1.30.0-py3-none-macosx_11_0_arm64.whl", hash = "sha256:228e07e1b2ef0790ec6d258897c50b83b0e8055b318fa2d33fcb86a8c5ba3525"},
+    {file = "playwright-1.30.0-py3-none-macosx_11_0_universal2.whl", hash = "sha256:115f5d77a21597200428411186ec72e10fed1cc4d7de3e6e705c415b781d344a"},
+    {file = "playwright-1.30.0-py3-none-manylinux1_x86_64.whl", hash = "sha256:24bb8fe1d7ae60ec971668812c0c6c21b2b12d320ff24da59cbb544a6a15a53c"},
+    {file = "playwright-1.30.0-py3-none-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:62032a1da59524a7f8d8cb4ed998cf793310b67693d3df94d00ceb13b5a9eced"},
+    {file = "playwright-1.30.0-py3-none-win32.whl", hash = "sha256:07249da8375fa7d52cbcdbfc36f5773f91fa8305aa340215db173101d289e210"},
+    {file = "playwright-1.30.0-py3-none-win_amd64.whl", hash = "sha256:198c1d816e802c4c9bc048232ec344f4bdfe3229e73a3a28a8eac33c46dab201"},
 ]
 
 [package.dependencies]
@@ -705,14 +705,14 @@ files = [
 
 [[package]]
 name = "pytest"
-version = "7.2.0"
+version = "7.2.1"
 description = "pytest: simple powerful testing with Python"
 category = "dev"
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "pytest-7.2.0-py3-none-any.whl", hash = "sha256:892f933d339f068883b6fd5a459f03d85bfcb355e4981e146d2c7616c21fef71"},
-    {file = "pytest-7.2.0.tar.gz", hash = "sha256:c4014eb40e10f11f355ad4e3c2fb2c6c6d1919c73f3b5a433de4708202cade59"},
+    {file = "pytest-7.2.1-py3-none-any.whl", hash = "sha256:c7c6ca206e93355074ae32f7403e8ea12163b1163c976fee7d4d84027c162be5"},
+    {file = "pytest-7.2.1.tar.gz", hash = "sha256:d45e0952f3727241918b8fd0f376f5ff6b301cc0777c6f9a556935c92d8a7d42"},
 ]
 
 [package.dependencies]
@@ -852,14 +852,14 @@ Cython = ">=0.29.23"
 
 [[package]]
 name = "selenium"
-version = "4.7.2"
+version = "4.8.0"
 description = ""
 category = "main"
 optional = false
-python-versions = "~=3.7"
+python-versions = ">=3.7"
 files = [
-    {file = "selenium-4.7.2-py3-none-any.whl", hash = "sha256:06a1c7d9f313130b21c3218ddd8852070d0e7419afdd31f96160cd576555a5ce"},
-    {file = "selenium-4.7.2.tar.gz", hash = "sha256:3aefa14a28a42e520550c1cd0f29cf1d566328186ea63aa9a3e01fb265b5894d"},
+    {file = "selenium-4.8.0-py3-none-any.whl", hash = "sha256:20f28ee4ea9b273b4112a7df5276ebb3052f79ff6eff42a564db6143e5926683"},
+    {file = "selenium-4.8.0.tar.gz", hash = "sha256:fee36724d6cf0b18c73781bb8ec7be4a35ab1e2564e64e64e64da75e50e052af"},
 ]
 
 [package.dependencies]
@@ -1019,4 +1019,4 @@ h11 = ">=0.9.0,<1"
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "665a8b3424b275be83ecdf609f71f668dd043430e14c68481464db1bed98d00a"
+content-hash = "5b18acce3aa7fcb0444e5a724957d4a3ee61130d25b2fa876a261aee36671a71"

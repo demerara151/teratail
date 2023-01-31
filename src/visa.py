@@ -29,7 +29,7 @@ class Spider:
             executable_path=ChromeDriverManager().install()
         )
         options: ChromiumOptions = ChromiumOptions()
-        options.add_argument("headless")
+        options.add_argument("headless=new")
 
         browser = webdriver.Chrome(service=service, options=options)
         browser.implicitly_wait(5)
