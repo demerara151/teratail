@@ -82,7 +82,7 @@ class Spider:
                     print("End of the pages.")
                     await browser.close()
                     break
-                elif res is not None and res.status == 200:
+                elif res and res.status == 200:
                     self.result.extend(
                         [
                             link
