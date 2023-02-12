@@ -4,7 +4,7 @@ https://teratail.com/questions/4q669m13gir32t
 """
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pprint import pprint
 from typing import Any
 
@@ -45,12 +45,30 @@ class Response(BaseModel):
 
 @dataclass(slots=True)
 class Makuake:
-    url: str
+    _base_url: str = (
+        "https://api.makuake.com/v2/projects"
+        "?page={}&per_page={}&type=most-funded"
+    )
+    _headers: dict[str, str] = field(
+        default_factory=lambda: {
+            "Accept": "application/json",
+            "User-Agent": (
+                "Mozilla/5.0 (Windows NT 10.0; rv:109.0)"
+                " Gecko/20100101 Firefox/109.0"
+            ),
+        },
+    )
 
-    def fetch(self) -> list[dict[str, str]]:
-        res = httpx.get(self.url)
-        res.raise_for_status()
-        json = Response(**res.json())
+    def fetch(self, *, page: int = 1, per_page: int = 15) -> httpx.Response:
+        if not 0 < per_page < 101:
+            raise Exception(f"Item number should be 1 to 100: {per_page = }")
+        url = self._base_url.format(page, per_page)
+        response = httpx.get(url=url, headers=self._headers)
+        response.raise_for_status()
+        return response
+
+    def parse_json(self, resp: httpx.Response):
+        json = Response(**resp.json())
         results: list[dict[str, str]] = []
         for project in json.projects:
             project_info = {
@@ -63,10 +81,7 @@ class Makuake:
 
 
 if __name__ == "__main__":
-    url: str = (
-        "https://api.makuake.com/v2/projects"
-        "?page=1&per_page=100&type=most-funded"
-    )
-    makuake = Makuake(url)
-    database = makuake.fetch()
+    makuake = Makuake()
+    response = makuake.fetch(page=3, per_page=100)
+    database = makuake.parse_json(response)
     pprint(database)
