@@ -173,7 +173,7 @@ finally:
     driver.quit()
 ```
 
-また、`selenium 4` ではドライバーをコンテキストマネージャーで定義できるようになったため、`with` 構文を使うとより安全に終了できる。
+また、`selenium 3.1.3` からドライバーをコンテキストマネージャーで定義できるようになったため、`with` 構文を使うとより安全に終了できる。
 
 ```python
 with webdriver.Chrome() as driver:
