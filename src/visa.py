@@ -69,7 +69,7 @@ class Spider:
 
         print("\nSuccess!")
 
-        browser.close()
+        browser.quit()
 
     async def fetch_with_pw(self, amount: int) -> None:
         """
