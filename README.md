@@ -123,7 +123,7 @@ URL: <https://teratail.com/questions/d6bl0tg488h8fd>
 ```python
 "Example"
 
-elements = driver.find_elements(By.XPATH, "a[@target=_blank]").get_attributes("href")
+elements = driver.find_elements(By.XPATH, "a[@target=_blank]")
 for element in elements:
     element.click()
 ```
