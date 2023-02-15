@@ -14,68 +14,79 @@ from webdriver_manager.chrome import ChromeDriverManager
 
 
 def extract_info(driver: webdriver.Chrome) -> str:
-    return driver.title
     # 「1,234」「5,678」のような数字（情報）を引き出す
-    # numbers = driver.find_element(
-    #     By.XPATH,
-    #     '//*[@id="main"]/div[8]/table[2]/tbody/'
-    #     "tr[1]/td[1]/table/tbody/tr[11]/td[3]",
-    # )
+    numbers = driver.find_element(
+        By.XPATH,
+        '//*[@id="main"]/div[8]/table[2]/tbody/'
+        "tr[1]/td[1]/table/tbody/tr[11]/td[3]",
+    )
 
-    # # ,をなくす
-    # return numbers.text.replace(",", "")
+    # ,をなくす
+    return numbers.text.replace(",", "")
+
+    # test
+    # return driver.title
 
 
-def main(url: str) -> list[str]:
-    service = Service(ChromeDriverManager().install())
-    options = webdriver.ChromeOptions()
+def main(url: str, driver: webdriver.Chrome) -> list[str]:
+    driver.implicitly_wait(30)
+    driver.get(url)
+    wait = WebDriverWait(driver, 10)
 
-    with webdriver.Chrome(service=service, options=options) as driver:
-        driver.implicitly_wait(30)
-        driver.get(url)
-        wait = WebDriverWait(driver, 10)
-        # ここまでテンプレ
+    # 最初のページのウィンドウ情報を記録しておく
+    original_window = driver.current_window_handle
 
-        # 最初のページのウィンドウ情報を記録しておく
-        original_window = driver.current_window_handle
+    # 最終結果
+    results: list[str] = []
 
-        # 最終結果
-        results: list[str] = []
+    # クリックしたい全ての要素
+    elements = driver.find_elements(
+        By.XPATH,
+        '//*[@id="root"]/div/div/div[5]/div[2]/div[4]/div[5]/'
+        "div/div[1]/table/tbody/tr/td[2]/div/div[1]/a",
+    )
 
-        # クリックしたい全ての要素
-        elements = driver.find_elements(By.CSS_SELECTOR, "#techblog ul li a")
+    # test
+    # elements = driver.find_elements(By.CSS_SELECTOR, "#techblog ul li a")
 
-        # 全要素の中の各要素に対して処理を実行
-        for element in elements:
+    # 全要素の中の各要素に対して処理を実行
+    for element in elements:
 
-            # 要素をクリック
-            element.click()
+        # 要素をクリック
+        element.click()
 
-            # 新しいウインドウかタブが開くまで待機
-            wait.until(EC.number_of_windows_to_be(2))
+        # 新しいウインドウかタブが開くまで待機
+        wait.until(EC.number_of_windows_to_be(2))
 
-            # 新しいウインドウハンドルを見つけるまでループする
-            for window_handle in driver.window_handles:
-                if window_handle != original_window:
-                    driver.switch_to.window(window_handle)
-                    result = extract_info(driver)
-                    # 結果を保存
-                    results.append(result)
-                    break
+        # 新しいウインドウハンドルを見つけるまでループする
+        for window_handle in driver.window_handles:
+            if window_handle != original_window:
+                driver.switch_to.window(window_handle)
+                result = extract_info(driver)
+                # 結果を保存
+                results.append(result)
+                break
 
-            # 抽出が終わったタブを閉じる
-            driver.close()
+        # 抽出が終わったタブを閉じる
+        driver.close()
 
-            # サイトへの負荷軽減のため数秒待機
-            time.sleep(2)
+        # サイトへの負荷軽減のため数秒待機
+        time.sleep(2)
 
-            # 一番最初のタブに戻る
-            driver.switch_to.window(original_window)
+        # 一番最初のタブに戻る
+        driver.switch_to.window(original_window)
 
-        return results
+    return results
 
 
 if __name__ == "__main__":
-    url: str = "https://gihyo.jp/"
-    result: list[str] = main(url)
-    print(result)
+    # test
+    # URL: str = "https://gihyo.jp/"
+
+    URL: str = ""
+    SERVICE = Service(ChromeDriverManager().install())
+    OPTIONS = webdriver.ChromeOptions()
+
+    with webdriver.Chrome(service=SERVICE, options=OPTIONS) as driver:
+        result: list[str] = main(URL, driver)
+        print(result)
