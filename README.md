@@ -6,14 +6,14 @@
 
 -   Hyper-V
 -   Windows 11 Home | Enterprise
--   Python 3.11.2
--   VSCode 1.75.1
--   Poetry 1.3.2
+-   Python 3.11.4
+-   VSCode 1.79.0
+-   Poetry 1.5.1
 
 ## Dependencies
 
 -   playwright 1.30.0
--   selenium 4.8.0
+-   selenium 4.10.0
 
 ## Note
 
@@ -178,9 +178,12 @@ finally:
 ```python
 with webdriver.Chrome() as driver:
     driver.get(url)
-    driver.close()
-# driver.quit() は不要
-# with 文を抜けると自動的に全てのドライバーのプロセスが終了する
+
+    # 複数のタブを開いていて、各タブ単体を閉じたいなら都度 close() する
+    # driver.close()
+
+# with 文を抜けると自動的に全てのドライバーのプロセスが終了するため、明示的に quit() する必要はない
+# driver.quit()
 ```
 
 ## LICENSE
