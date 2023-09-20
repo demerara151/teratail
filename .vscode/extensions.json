@@ -1,10 +1,11 @@
 {
-	"recommendations": [
-		"ms-python.python",
-		"streetsidesoftware.code-spell-checker",
-		"esbenp.prettier-vscode",
-		"tamasfe.even-better-toml",
-		"catppuccin.catppuccin-vsc",
-		"usernamehw.errorlens"
-	]
+  "recommendations": [
+    "ms-python.python",
+    "ms-python.black-formatter",
+    "ms-python.flake8",
+    "streetsidesoftware.code-spell-checker",
+    "esbenp.prettier-vscode",
+    "tamasfe.even-better-toml",
+    "usernamehw.errorlens"
+  ]
 }
