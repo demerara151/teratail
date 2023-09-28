@@ -61,7 +61,7 @@ class Makuake:
 
     def fetch(self, *, page: int = 1, per_page: int = 15) -> httpx.Response:
         if not 0 < per_page < 101:
-            raise Exception(f"Item number should be 1 to 100: {per_page = }")
+            raise ValueError(f"Item number should be 1 to 100: {per_page = }")
         url = self._base_url.format(page, per_page)
         response = httpx.get(url=url, headers=self._headers)
         response.raise_for_status()
