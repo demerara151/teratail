@@ -32,7 +32,8 @@ class Spider:
                     "Mozilla/5.0 (Windows NT 10.0; rv:109.0)"
                     " Gecko/20100101 Firefox/109.0"
                 ),
-            }
+            },
+            timeout=1.0,
         ) as client:
             while self.page_number < self.limit:
                 url = self.url.format(self.page_number)
@@ -57,6 +58,7 @@ class Spider:
                         ]
                     )
                     self.page_number += 1
+                    await asyncio.sleep(1)
                     continue
                 else:
                     print(f"Status: {response_header.status_code}")
