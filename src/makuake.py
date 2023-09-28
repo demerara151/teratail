@@ -67,17 +67,16 @@ class Makuake:
         response.raise_for_status()
         return response
 
-    def parse_json(self, resp: httpx.Response):
+    def parse_json(self, resp: httpx.Response) -> list[dict[str, str]]:
         json = Response(**resp.json())
-        results: list[dict[str, str]] = []
-        for project in json.projects:
-            project_info = {
+        return [
+            {
                 "タイトル": project.title,
                 "応援購入総額": f"{project.collected_money:,}円",
                 "サポーター": f"{project.collected_supporter:,}人",
             }
-            results.append(project_info)
-        return results
+            for project in json.projects
+        ]
 
 
 if __name__ == "__main__":
