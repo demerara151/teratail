@@ -6,14 +6,14 @@
 
 - Hyper-V
 - Windows 11 Home | Enterprise
-- Python 3.11.4
-- VSCode 1.79.0
-- Poetry 1.5.1
+- Python 3.12
+- VSCode 1.83.1
+- Poetry 1.6.1
 
 ## Dependencies
 
 - playwright 1.30.0
-- selenium 4.10.0
+- selenium 4.14.0
 
 ## Note
 
@@ -269,6 +269,38 @@ yahoo 知恵袋の質問文をスクレイピングし、csv に格納する。
 ただ、知恵袋のスクレイピングなら `selenium` を使う必要もないしページの構成見る限りむしろ効率悪いので、`httpx` 使った方がよさそう。
 
 一覧ページの HTML にスクリプトとして、`json` が埋め込まれているので、質問の総数、見出し、URL、質問日時等の情報を一括で取得できる。あとは、一覧ページの数だけ繰り返せばいい。本文の取得は、非同期で 100 件ずつくらいまとめてやれば、時間も短縮できて効率もいい。
+
+### 6. driver.find_elementsによる<button>要素の読込
+
+URL: <https://teratail.com/questions/s25iuek3rwu5s9>
+
+#### 要約
+
+ボタン要素が読み込めない
+
+ページ内のコメント部分、「もっと読む」のボタンを認識できない
+
+#### エラーメッセージ
+
+```txt
+selenium.common.exceptions.NoSuchWindowException: Message: no such window: target window already closed
+from unknown error: web view not found
+```
+
+ボタンどうこうではなく、存在しない Window に対して処理を実行しているよというエラーのようです
+
+#### 解決策
+
+最初のニュースページの HTML から JSON が埋め込まれているスクリプトを抽出できているので、コメントページでも同じことをすればボタンを押す必要もなさそう
+
+[yahoo_comment](/src/yahoo_comment.py)
+
+##### 変更点
+
+- `selenium` を削除
+- `requests` を `httpx` に、`BeautifulSoup` を `selectolax` にそれぞれ変更
+- クラスを使ってコードの重複を削減
+
 
 ## LICENSE
 

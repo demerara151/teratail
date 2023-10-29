@@ -48,17 +48,20 @@ class YahooComment:
             raise ScriptNotFoundError("No json script founds.")
 
     def get_comments(self, comment_url: str) -> None:
+        "Parse json script and print comments."
         tree = self.fetch(comment_url)
 
         if node := tree.css_first("body > script:nth-child(4)"):
             json_data = json.loads(node.text().split(sep="= ")[1])
 
+            # コメンテーターによるコメント
             commentator_comments: list[dict[str, Any]] = json_data[
                 "commentFull"
             ]["commentatorComment"]
             for comment in commentator_comments:
                 print(comment["text"], sep="\n")
 
+            # ユーザーによるコメント
             user_comment_list: list[dict[str, Any]] = json_data["commentFull"][
                 "userCommentList"
             ]
@@ -69,8 +72,8 @@ class YahooComment:
 
 
 if __name__ == "__main__":
-    yahoo_news_url = "https://news.yahoo.co.jp/pickup/6479600"
+    news_url = "https://news.yahoo.co.jp/pickup/6479600"
     yahoo = YahooComment()
-    url = yahoo.get_comment_url(yahoo_news_url)
+    url = yahoo.get_comment_url(news_url)
     print(url)
     yahoo.get_comments(url)
