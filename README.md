@@ -278,7 +278,9 @@ URL: <https://teratail.com/questions/s25iuek3rwu5s9>
 
 ボタン要素が読み込めない
 
-ページ内のコメント部分、「もっと読む」のボタンを認識できない
+~~ページ内のコメント部分、「もっと読む」のボタンを認識できない~~
+
+コメントページ内、各コメントの「返信」にあたる部分のボタンが認識できない
 
 #### エラーメッセージ
 
@@ -290,6 +292,8 @@ from unknown error: web view not found
 ボタンどうこうではなく、存在しない Window に対して処理を実行しているよというエラーのようです
 
 #### 解決策
+
+16:15 追記: 単に Chrome とドライバーのバージョンが合ってないだけっぽい。ちなみに、返信部分はコメント ID 取得して API 呼び出せば取得できそう。`https://news.yahoo.co.jp/api/comment/v2/articles/0fdf20fc753a62a6c4bb4e2b4e9bd9f705124d8e/comments/ad90ff9d-a0e0-423e-9ef2-0fdaef7b738f/reply?start=1&results=10&sort=recommendation` まあ、403 が返ってくるんだけども…
 
 最初のニュースページの HTML から JSON が埋め込まれているスクリプトを抽出できているので、コメントページでも同じことをすればボタンを押す必要もなさそう
 
