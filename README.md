@@ -270,7 +270,7 @@ yahoo 知恵袋の質問文をスクレイピングし、csv に格納する。
 
 一覧ページの HTML にスクリプトとして、`json` が埋め込まれているので、質問の総数、見出し、URL、質問日時等の情報を一括で取得できる。あとは、一覧ページの数だけ繰り返せばいい。本文の取得は、非同期で 100 件ずつくらいまとめてやれば、時間も短縮できて効率もいい。
 
-### 6. driver.find_elementsによる<button>要素の読込
+### 6. driver.find_elementsによる `<button>` 要素の読込
 
 URL: <https://teratail.com/questions/s25iuek3rwu5s9>
 
@@ -282,7 +282,7 @@ URL: <https://teratail.com/questions/s25iuek3rwu5s9>
 
 #### エラーメッセージ
 
-```txt
+```shell
 selenium.common.exceptions.NoSuchWindowException: Message: no such window: target window already closed
 from unknown error: web view not found
 ```
