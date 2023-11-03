@@ -8,10 +8,7 @@ from dataclasses import dataclass
 
 from playwright.async_api import async_playwright
 from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.chromium.options import ChromiumOptions
 from selenium.webdriver.common.by import By
-from webdriver_manager.chrome import ChromeDriverManager
 
 
 @dataclass(slots=True)
@@ -25,13 +22,10 @@ class Spider:
         """
         Fetch the data using selenium.
         """
-        service: Service = Service(
-            executable_path=ChromeDriverManager().install()
-        )
-        options: ChromiumOptions = ChromiumOptions()
+        options = webdriver.ChromeOptions()
         options.add_argument("headless=new")
 
-        browser = webdriver.Chrome(service=service, options=options)
+        browser = webdriver.Chrome(options=options)
         browser.implicitly_wait(5)
         browser.get(self.url)
 
