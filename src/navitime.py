@@ -30,25 +30,31 @@ class Spider:
                 "Accept": "text/html",
                 "User-Agent": (
                     "Mozilla/5.0 (Windows NT 10.0; rv:109.0)"
-                    " Gecko/20100101 Firefox/109.0"
+                    " Gecko/20100101 Firefox/119.0"
                 ),
             },
-            timeout=1.0,
+            timeout=10.0,
+            base_url="https://www.navitime.co.jp",
         ) as client:
             while self.page_number < self.limit:
-                url = self.url.format(self.page_number)
-
+                url = "/category/0805/11324"
+                payload = {"page": self.page_number}
                 # 初めに HEAD request を投げてステータスコードを確認
-                response_header: httpx.Response = await client.head(url)
+                response_header = await client.head(url=url, params=payload)
                 if response_header.status_code == 404:
-                    print("End of the pages.")
+                    print("End of the page reached.")
                     break
                 elif response_header.status_code == 200:
-                    response: httpx.Response = await client.get(url)
+                    response = await client.get(
+                        url=url,
+                        params=payload,
+                    )
+                    response.raise_for_status()
+                    print(f"{self.page_number}: Parsing HTML...")
                     tree = HTMLParser(response.content)
                     self.result.extend(
                         [
-                            link
+                            f"https:{link}"
                             for link in [
                                 node.attributes["href"]
                                 for node in tree.css("a")
@@ -58,7 +64,7 @@ class Spider:
                         ]
                     )
                     self.page_number += 1
-                    await asyncio.sleep(1)
+                    await asyncio.sleep(2)
                     continue
                 else:
                     print(f"Status: {response_header.status_code}")
