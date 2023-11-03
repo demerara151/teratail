@@ -45,27 +45,29 @@ class Response(BaseModel):
 
 @dataclass(slots=True)
 class Makuake:
-    _base_url: str = (
-        "https://api.makuake.com/v2/projects"
-        "?page={}&per_page={}&type=most-funded"
-    )
     _headers: dict[str, str] = field(
         default_factory=lambda: {
             "Accept": "application/json",
             "User-Agent": (
                 "Mozilla/5.0 (Windows NT 10.0; rv:109.0)"
-                " Gecko/20100101 Firefox/109.0"
+                " Gecko/20100101 Firefox/119.0"
             ),
         },
     )
 
     def fetch(self, *, page: int = 1, per_page: int = 15) -> httpx.Response:
         if not 0 < per_page < 101:
-            raise ValueError(f"Item number should be 1 to 100: {per_page = }")
-        url = self._base_url.format(page, per_page)
-        response = httpx.get(url=url, headers=self._headers)
-        response.raise_for_status()
-        return response
+            raise ValueError(f"Item number should be 1 to 100: {per_page=}")
+
+        with httpx.Client(
+            params={"page": page, "per_page": per_page, "type": "most-funded"},
+            headers=self._headers,
+            base_url="https://api.makuake.com",
+        ) as client:
+            response = client.get(url="v2/projects")
+            response.raise_for_status()
+
+            return response
 
     def parse_json(self, resp: httpx.Response) -> list[dict[str, str]]:
         json = Response(**resp.json())
