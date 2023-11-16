@@ -88,11 +88,12 @@ class YahooComment:
             driver.get(f"{self.base_url}/{url}")
             # 問題の箇所
             buttons = driver.find_elements(
-                By.CSS_SELECTOR, ".sc-kjUpcT.jrftuB"
+                By.CSS_SELECTOR, "article > div > div > button"
             )
-            for button in buttons:
-                time.sleep(0.2)
-                button.click()
+            for i, button in enumerate(buttons):
+                if i % 2 == 0:
+                    time.sleep(0.2)
+                    button.click()
             # ページソースの取得が速すぎると最後の返信が展開されていない事があるため
             time.sleep(1)
             html = driver.page_source
@@ -105,7 +106,7 @@ class YahooComment:
 
 
 if __name__ == "__main__":
-    news_url = "https://news.yahoo.co.jp/pickup/6479600"
+    news_url = "https://news.yahoo.co.jp/pickup/6481785"
     yahoo = YahooComment()
     url = yahoo.get_comment_url(news_url)
     print(url)
