@@ -4,13 +4,15 @@ version = "0.1.0"
 description = ""
 authors = ["demerara151 <demeraraonfire@gmail.com>"]
 readme = "README.md"
+license = "MIT"
+packages = [{include = "src"}]
 
 [tool.poetry.dependencies]
 python = "^3.12"
-httpx = "^0.25.0"
+httpx = "^0.25.1"
 selectolax = "^0.3.17"
-selenium = "^4.15.0"
-pydantic = "^2.4.2"
+selenium = "^4.15.2"
+pydantic = "^2.5.1"
 playwright = "^1.39.0"
 
 [tool.poetry.group.dev.dependencies]
